@@ -16,11 +16,12 @@ class FIFOCache(BaseCaching):
         '''sets the key/value pair'''
         if key is None or item is None:
             pass
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            first_key = self.cache_data.pop(0)        
-            print(f'DISCARD: {key}')
-        self.cache_data[key] = item
-
+        else:
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                first_key = next(iter(self.cache_data.keys()))
+                del self.cache_data[first_key]
+                print(f'DISCARD: {key}')
+            self.cache_data[key] = item
 
     def get(self, key):
         '''retrieves the value of key'''
