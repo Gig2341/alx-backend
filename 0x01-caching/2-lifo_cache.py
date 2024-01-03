@@ -25,7 +25,6 @@ class LIFOCache(BaseCaching):
                 elif key in self.cache_data.keys():
                     last_key = key
                     del self.cache_data[last_key]
-                    print(f'DISCARD: {last_key}')
             self.cache_data[key] = item
 
     def get(self, key):
